@@ -66,9 +66,4 @@ scrolito=Scrollbar(raiz, command=ventanaranking.yview)
 scrolito.grid(row=1,column=9, sticky="nsew")
 ventanaranking.config(yscrollcommand=scrolito.set)
 
-
-
-
-
-
 raiz.mainloop()
