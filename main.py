@@ -1,10 +1,11 @@
 from tkinter import *
+from tkinter import scrolledtext
 
 raiz = Tk()
 
 raiz.title('Comparador')
 raiz.resizable(0,0)
-raiz.geometry('770x400')
+raiz.geometry('800x400')
 raiz.config(bg='gray')
 
 
@@ -18,29 +19,26 @@ agregar.grid(column=3, row=0 , pady=10)
 
 listatxt = Listbox(raiz,height=20,width=28)
 listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
-listatxt.insert(0,"Holakace")
-listatxt.insert(1,"asdasf")
-listatxt.insert(2,"sadasf")
-listatxt.insert(3,"aeaeaeae")
-listatxt.insert(4,"puctaaa")
-listatxt.insert(5,"toyred")
-listatxt.insert(6,"nosomobica")
-listatxt.insert(7,"owowow")
-listatxt.insert(8,"webiwebin")
-listatxt.insert(9,"webiwebin")
-listatxt.insert(10,"webiwebin")
-listatxt.insert(11,"wefdsgsdfwebin")
-listatxt.insert(12,"wegfdsgn")
-listatxt.insert(13,"webihjfgjh")
-listatxt.insert(14,"wgfadsdsfn")
-listatxt.insert(15,"wdasfdsfn")
-listatxt.insert(16,"webgfsgsadin")
-listatxt.insert(17,"wegfdgsn")
-listatxt.insert(18,"webiwebin")
-listatxt.insert(19,"wegfdfgdn")
-listatxt.insert(20,"webiwebin")
-listatxt.insert(21,"weasdsadn")
-listatxt.insert(22,"wesadsadn")
+listatxt.insert(0,"Figura1.txt")
+listatxt.insert(1,"Figura2.txt")
+listatxt.insert(2,"Figura3.txt")
+listatxt.insert(3,"Figura4.txt")
+listatxt.insert(4,"Figura5.txt")
+listatxt.insert(5,"Figura6.txt")
+listatxt.insert(6,"Figura7.txt")
+listatxt.insert(7,"Figura8.txt")
+listatxt.insert(8,"Figura9.txt")
+listatxt.insert(9,"Figura10.txt")
+listatxt.insert(10,"Figura11.txt")
+listatxt.insert(11,"Figura12.txt")
+listatxt.insert(12,"Figura13.txt")
+listatxt.insert(13,"Figura14.txt")
+listatxt.insert(14,"Figura15.txt")
+listatxt.insert(15,"Figura16.txt")
+listatxt.insert(16,"Figura17.txt")
+listatxt.insert(17,"Figura18.txt")
+listatxt.insert(18,"Figura20.txt")
+
 scrolvert=Scrollbar(raiz, command=listatxt.yview)
 scrolvert.grid(row=1,column=4, sticky="nsew")
 listatxt.config(yscrollcommand=scrolvert.set)
@@ -51,10 +49,10 @@ listatxt.config(yscrollcommand=scrolvert.set)
 
 leerfigura= Button(raiz, text="Leer figura de consulta")
 leerfigura.grid(column=5, row=0, sticky="w", padx=10 )
-ventanamatriz= Listbox(raiz,width=35)
+ventanamatriz= scrolledtext.ScrolledText(raiz,width=28,height=20)
 ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
-
+ 
 #---------- Ranking -------------
 
 
