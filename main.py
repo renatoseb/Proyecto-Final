@@ -2,19 +2,36 @@ from tkinter import *
 from os import scandir, getcwd
 from os.path import abspath
 
-def rutas(ruta = getcwd()):
-    return [arch.name for arch in scandir(ruta) if arch.is_file()]
-
-def nombresarchivos(ruta = getcwd()):
+def nombresarchv(ruta = getcwd()):
+    b= [arch.name for arch in scandir(ruta) if arch.is_file()]
+    for x in range(len(b)):
+        b[x]=b[x].rstrip(".txt")
+    return b
+def ruta(ruta = getcwd()):
     return [abspath(arch.path) for arch in scandir(ruta) if arch.is_file()]
+def busquedamatriz(Filename):
+  a=open(Filename)  # se abre el archivo con la matriz dentro (ES LA RUTA)
 
+  mimatriz=a.read()  # se asigna esa matriz a una variable (pero aun no esta en lista de listas)
 
+  b=mimatriz.split("\n") # se divide por el salto de linea
+  ma=[] # será la matriz
+  for x in b: # "b" ya esta en lista de listas, pero sus elementos no
+    c=list(x)
+    ma.append(c) # se añade a una nueva lista
+  return ma  # retorna el archivo en una matriz(listas dentro de otra lista)
 rutafig="C:/ICC/PY3" #donde estaran las figuras
-
+listanombre=nombresarchv(rutafig)
+listaderutas=ruta(rutafig)
+MIDICCIONARIO={}
+nombres=nombresarchv(rutafig)
+rutas=ruta(rutafig)
+for x in range(len(listanombre)):
+    MIDICCIONARIO[listanombre[x]]=busquedamatriz(listaderutas[x])
 
 def abrir():
-    listanombre=nombresarchivos(rutafig)
-    listaderutas=nombresarchivos(rutafig)
+    listanombre=nombresarchv(rutafig)
+    listaderutas=ruta(rutafig)
     listatxt = Listbox(raiz,height=20,width=28)
     listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
     for x in range(len(listaderutas)):
@@ -24,8 +41,9 @@ def abrir():
     scrolvert.grid(row=1,column=4, sticky="nsew")
     listatxt.config(yscrollcommand=scrolvert.set)
 def crear_ventana():
+    global MIDICCIONARIO
     window = Toplevel(raiz)
-    window.geometry("300x300")
+    window.geometry("300x300+500+300")
     window.resizable(0,0)
     window.config(bg="grey")
     window.title("Nueva matriz")
@@ -45,6 +63,12 @@ def crear_ventana():
         a=str(entradamatriz.get())
         file.write(a)
         window.destroy()
+    matrisss=str(entradamatriz.get()).split("\n")
+    newmatriz=[]
+    for x in matrisss:
+        c=list(x)
+        newmatriz.append(c)
+    MIDICCIONARIO[nombrenew.get()]=newmatriz
     we= Button(window, text="Agregar",command=agregar)
     we.pack(side=BOTTOM, padx=5, pady=5)
 #def leercoleccion():
@@ -53,7 +77,7 @@ raiz = Tk()
 
 raiz.title('Comparador')
 raiz.resizable(0,0)
-raiz.geometry('840x460')
+raiz.geometry('840x460+500+300')
 raiz.config(bg='gray')
 raiz.config(bd=35)
 raiz.config(relief="sunken")
@@ -80,6 +104,7 @@ ventanamatriz= Listbox(raiz,width=35)
 ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 
+
 #---------- Ranking -------------
 
 
@@ -93,5 +118,6 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
 
 
