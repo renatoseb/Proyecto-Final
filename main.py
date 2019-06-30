@@ -1,24 +1,53 @@
 from tkinter import *
+import os
+
+rutafig="C:/ICC/PY3" #donde estaran las figuras
+from os import scandir, getcwd
+
+def rutas(ruta = getcwd()):
+    return [arch.name for arch in scandir(ruta) if arch.is_file()]
+from os import scandir, getcwd
+from os.path import abspath
+
+def nombresarchivos(ruta = getcwd()):
+    return [abspath(arch.path) for arch in scandir(ruta) if arch.is_file()]
+
+def abrir():
+    listanombre=nombresarchivos(rutafig)
+    listaderutas=nombresarchivos(rutafig)
+    listatxt = Listbox(raiz,height=20,width=28)
+    listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
+    for x in range(len(listaderutas)):
+        listatxt.insert(x,listaderutas[x])
+
+    scrolvert=Scrollbar(raiz, command=listatxt.yview)
+    scrolvert.grid(row=1,column=4, sticky="nsew")
+    listatxt.config(yscrollcommand=scrolvert.set)
 def crear_ventana():
     window = Toplevel(raiz)
     window.geometry("300x300")
+    window.resizable(0,0)
+    window.config(bg="grey")
     window.title("Nueva matriz")
     milabel=Label(window,text="Ingrese nueva matriz")
     milabel.pack()
     entradamatriz=Entry(window)
     entradamatriz.pack(fill=X , ipady=50)
-def abrir():
-    listatxt = Listbox(raiz,height=20,width=28)
-    listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
-    for x in range(1,k+1):
-        listatxt.insert(x-1,"figura"+str(x)+".txt")
-
-    scrolvert=Scrollbar(raiz, command=listatxt.yview)
-    scrolvert.grid(row=1,column=4, sticky="nsew")
-    listatxt.config(yscrollcommand=scrolvert.set)
-
+    Label(window,text="Ingrese nombre de la matriz").pack(ipady=5)
+    nombrenew=Entry(window)
+    nombrenew.pack(fill=X,pady=30)
+    def agregar():
+        k=21
+        #-------cambien en donde esta guardado su archivo--------
+        file = open(rutafig+"/"+str(nombrenew.get())+".txt", "w")
+        k+=1
+        #----aaaa---
+        a=str(entradamatriz.get())
+        file.write(a)
+    we= Button(window, text="Agregar",command=agregar)
+    we.pack(side=BOTTOM, padx=5, pady=5)
 #def leercoleccion():
-k=20
+
 raiz = Tk()
 
 raiz.title('Comparador')
@@ -27,6 +56,7 @@ raiz.geometry('840x460')
 raiz.config(bg='gray')
 raiz.config(bd=35)
 raiz.config(relief="sunken")
+var=StringVar()
 
 #-------------Parte de los archivos------------
 
@@ -62,3 +92,4 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
