@@ -157,5 +157,3 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 raiz.mainloop()
 
 
-
-#JSADFADSFASDFSADDSAFDSFSADF
