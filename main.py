@@ -1,16 +1,16 @@
 from tkinter import *
-import os
-
-rutafig="C:/ICC/PY3" #donde estaran las figuras
-from os import scandir, getcwd
-
-def rutas(ruta = getcwd()):
-    return [arch.name for arch in scandir(ruta) if arch.is_file()]
 from os import scandir, getcwd
 from os.path import abspath
 
+def rutas(ruta = getcwd()):
+    return [arch.name for arch in scandir(ruta) if arch.is_file()]
+
 def nombresarchivos(ruta = getcwd()):
     return [abspath(arch.path) for arch in scandir(ruta) if arch.is_file()]
+
+
+rutafig="C:/ICC/PY3" #donde estaran las figuras
+
 
 def abrir():
     listanombre=nombresarchivos(rutafig)
@@ -44,6 +44,7 @@ def crear_ventana():
         #----aaaa---
         a=str(entradamatriz.get())
         file.write(a)
+        window.destroy()
     we= Button(window, text="Agregar",command=agregar)
     we.pack(side=BOTTOM, padx=5, pady=5)
 #def leercoleccion():
@@ -92,4 +93,5 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
 
