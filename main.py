@@ -160,9 +160,9 @@ ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
 ventanaranking= Text(raiz,width=30,height=20)
 ventanaranking.grid(column=7, row=1, padx=10,columnspan=2)
-#scrolito=Scrollbar(raiz, command=ventanaranking.yview)
-#scrolito.grid(row=1,column=9, sticky="nsew")
-#ventanaranking.config(yscrollcommand=scrolito.set)
+scrolito=Scrollbar(raiz, command=ventanaranking.yview)
+scrolito.grid(row=1,column=9, sticky="nsew")
+ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
