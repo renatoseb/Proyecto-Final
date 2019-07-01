@@ -120,7 +120,7 @@ def recuperar():
                 matriz+=y
             matriz+="\n"
         ventanamatriz.configure(text=matriz)
-        ventanamatriz.configure(font=("Helvetica", 11))
+        ventanamatriz.configure(font=("Arial", 11))
 
 
 leerfigura= Button(raiz, text="Leer figura de consulta",command=recuperar)
