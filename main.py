@@ -2,6 +2,7 @@ from tkinter import *
 from os import scandir, getcwd
 from os.path import abspath
 from tkinter.font import Font
+from tkinter import scrolledtext
 
 def nombresarchv(ruta = getcwd()):
     b= [arch.name for arch in scandir(ruta) if arch.is_file()]
@@ -114,19 +115,16 @@ def recuperar():
     if len(listabox.curselection())!=0:
         w=listaderutas.index(listabox.get(listabox.curselection()[0]))
         matriza=valores[w]
-        matriz=""
         for x in matriza:
             for y in x:
-                matriz+=y
-            matriz+="\n"
-        ventanamatriz.configure(text=matriz)
-        ventanamatriz.configure(font=("Arial", 11))
+                ventanamatriz.insert(END, str(y))
+            ventanamatriz.insert(END, '\n')
 
 
 leerfigura= Button(raiz, text="Leer figura de consulta",command=recuperar)
 leerfigura.grid(column=5, row=0, sticky="w", padx=10 )
 
-ventanamatriz= Label(raiz,width=28,height=20)
+ventanamatriz= Text(raiz,width=28,height=20)
 ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 
