@@ -1,7 +1,6 @@
 from tkinter import *
 from os import scandir, getcwd
 from os.path import abspath
-from tkinter.font import Font
 
 def nombresarchv(ruta = getcwd()):
     b= [arch.name for arch in scandir(ruta) if arch.is_file()]
@@ -31,18 +30,16 @@ for x in range(len(listanombre)):
     MIDICCIONARIO[listanombre[x]]=busquedamatriz(listaderutas[x])
 
 def abrir():
-    global listabox
     listanombre=nombresarchv(rutafig)
     listaderutas=ruta(rutafig)
-    listabox = Listbox(raiz,height=20,width=28)
-    listabox.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
+    listatxt = Listbox(raiz,height=20,width=28)
+    listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
     for x in range(len(listaderutas)):
-        listabox.insert(x,listaderutas[x])
+        listatxt.insert(x,listaderutas[x])
 
-    scrolvert=Scrollbar(raiz, command=listabox.yview)
+    scrolvert=Scrollbar(raiz, command=listatxt.yview)
     scrolvert.grid(row=1,column=4, sticky="nsew")
-    listabox.config(yscrollcommand=scrolvert.set)
-
+    listatxt.config(yscrollcommand=scrolvert.set)
 def crear_ventana():
     global MIDICCIONARIO
     window = Toplevel(raiz)
@@ -76,62 +73,42 @@ def crear_ventana():
     we.pack(side=BOTTOM, padx=5, pady=5)
 #def leercoleccion():
 
-
 raiz = Tk()
 
 raiz.title('Comparador')
 raiz.resizable(0,0)
-#<<<<<<< HEAD
-raiz.geometry('800x400')
-#=======
 raiz.geometry('840x460+500+300')
-
 raiz.config(bg='gray')
 raiz.config(bd=35)
 raiz.config(relief="sunken")
 var=StringVar()
 
 #-------------Parte de los archivos------------
-listabox = Listbox(raiz,height=20,width=28)
-listabox.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
+
 abrircoleccion = Button(raiz, text="Abrir colección",command=abrir)
 abrircoleccion.grid(column=2, row=0, padx=10, pady=10,sticky="w")
-
-scrolvert=Scrollbar(raiz, command=listabox.yview)
-scrolvert.grid(row=1,column=4, sticky="nsew")
-listabox.config(yscrollcommand=scrolvert.set)
-#=======
+listatxt = Listbox(raiz,height=20,width=28)
+listatxt.grid(column=2, row=1, padx=10,columnspan=2,rowspan=2,sticky="w")
 
 
 agregar= Button(raiz, text="Agregar más...", command=crear_ventana)
 agregar.grid(column=3, row=0 , pady=10)
 
-valores=list(MIDICCIONARIO.values())
-keys=list(MIDICCIONARIO.keys())
+
 
 #--------------Acá se mostrará la matriz a comparar impresa---------
-def recuperar():
-    if len(listabox.curselection())!=0:
-        w=listaderutas.index(listabox.get(listabox.curselection()[0]))
-        matriza=valores[w]
-        matriz=""
-        for x in matriza:
-            for y in x:
-                matriz+=y
-            matriz+="\n"
-        ventanamatriz.configure(text=matriz)
-        ventanamatriz.configure(font=("Helvetica", 11))
-
-
-leerfigura= Button(raiz, text="Leer figura de consulta",command=recuperar)
+leerfigura= Button(raiz, text="Leer figura de consulta")
 leerfigura.grid(column=5, row=0, sticky="w", padx=10 )
-
-ventanamatriz= Label(raiz,width=28,height=20)
+ventanamatriz= Listbox(raiz,width=35)
 ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
-
-
-
+def imprimir_en_label():
+    ventanamatriz.after(100, imprimir_en_label) # Llamada recursiva con .after
+    ind = listatxt.curselection()
+    if listatxt.curselection() != ():
+        asa=listatxt.get(ind)
+        ventanamatriz.insert(0,str(asa))
+imprimir_en_label()
 
 
 #---------- Ranking -------------
@@ -139,7 +116,7 @@ ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 ranking= Button(raiz, text="Ranking de Similitud")
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
-ventanaranking= Listbox(raiz,width=45,height=20) 
+ventanaranking= Listbox(raiz,width=45,height=20)
 ventanaranking.grid(column=7, row=1, padx=10, columnspan=2)
 scrolito=Scrollbar(raiz, command=ventanaranking.yview)
 scrolito.grid(row=1,column=9, sticky="nsew")
@@ -147,5 +124,3 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
-
-
