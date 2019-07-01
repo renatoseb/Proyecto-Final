@@ -135,17 +135,40 @@ ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 
 #---------- Ranking -------------
+def rankinss():
+    global matriza
+    global MIDICCIONARIO
+    global valores,keys
+    q=0
 
+    for x in valores:
 
-ranking= Button(raiz, text="Ranking de Similitud")
+        ventanaranking.insert(END,keys[q]+"\n")
+        a=""
+        for i in x:
+            for j in i:
+                a+=j
+            a+="\n"
+        ventanaranking.insert(END,a+"\n")
+        q+=1
+    """if len(listabox.curselection())!=0:
+        w=listaderutas.index(listabox.get(listabox.curselection()[0]))
+        matriza=valores[w]
+        for x in matriza:
+            for y in x:
+                ventanamatriz.insert(END, str(y))
+            ventanamatriz.insert(END, '\n')"""
+
+ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
-ventanaranking= Text(raiz,width=30,height=20) 
-ventanaranking.grid(column=7, row=1, padx=10, columnspan=2)
+ventanaranking= Text(raiz,width=30,height=20,font=("Arial",11))
+ventanaranking.grid(column=7, row=1, padx=10,columnspan=2)
 scrolito=Scrollbar(raiz, command=ventanaranking.yview)
 scrolito.grid(row=1,column=9, sticky="nsew")
 ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
 
 
