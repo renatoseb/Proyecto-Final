@@ -111,7 +111,8 @@ valores=list(MIDICCIONARIO.values())
 keys=list(MIDICCIONARIO.keys())
 
 #--------------Acá se mostrará la matriz a comparar impresa---------
-def recuperar():
+def recuperar():    
+    ventanamatriz.delete(1.0,END)
     if len(listabox.curselection())!=0:
         w=listaderutas.index(listabox.get(listabox.curselection()[0]))
         matriza=valores[w]
@@ -119,6 +120,7 @@ def recuperar():
             for y in x:
                 ventanamatriz.insert(END, str(y))
             ventanamatriz.insert(END, '\n')
+    
 
 
 leerfigura= Button(raiz, text="Leer figura de consulta",command=recuperar)
