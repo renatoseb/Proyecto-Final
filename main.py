@@ -140,16 +140,13 @@ def rankinss():
     global MIDICCIONARIO
     global valores,keys
     q=0
-
     for x in valores:
-
-        ventanaranking.insert(END,keys[q]+"\n")
-        a=""
+        ventanaranking.insert(END,str(keys[q])+"\n")
         for i in x:
             for j in i:
-                a+=j
-            a+="\n"
-        ventanaranking.insert(END,a+"\n")
+                ventanaranking.insert(END,str(j))
+            ventanaranking.insert(END, '\n')
+        ventanaranking.insert(END,'\n')
         q+=1
     """if len(listabox.curselection())!=0:
         w=listaderutas.index(listabox.get(listabox.curselection()[0]))
@@ -161,11 +158,11 @@ def rankinss():
 
 ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
-ventanaranking= Text(raiz,width=30,height=20,font=("Arial",11))
+ventanaranking= Text(raiz,width=30,height=20)
 ventanaranking.grid(column=7, row=1, padx=10,columnspan=2)
-scrolito=Scrollbar(raiz, command=ventanaranking.yview)
-scrolito.grid(row=1,column=9, sticky="nsew")
-ventanaranking.config(yscrollcommand=scrolito.set)
+#scrolito=Scrollbar(raiz, command=ventanaranking.yview)
+#scrolito.grid(row=1,column=9, sticky="nsew")
+#ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
