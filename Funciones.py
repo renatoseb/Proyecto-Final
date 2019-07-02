@@ -1,3 +1,6 @@
+from os import scandir, getcwd
+from os.path import abspath
+
 def partition(A,low,high):
     i = low 
     pivot = A[low]
@@ -15,8 +18,6 @@ def quicksort(A,low,high):
         quicksort(A,low,w-1)
         quicksort(A,w+1,high)
     return A
-#<<<<<<< HEAD
-#=======
 def filascolumnas(n): # n = una matriz, esta funcion para retornar el numero de filas y columnas
   fiyco=[] # lista vacía
   fila=0
@@ -53,4 +54,22 @@ def similitud(n,b): # n,b son matrices
       if c==len(n[0]): # se iguala al primer elemento
         c=0
         a+=1
-#>>>>>>> 47d5ec198bcddff6c1965f3454ee6c9df4a91628
+
+def nombresarchv(ruta = getcwd()):
+    b= [arch.name for arch in scandir(ruta) if arch.is_file()]
+    for x in range(len(b)):
+        b[x]=b[x].rstrip(".txt")
+    return b
+def ruta(ruta = getcwd()):
+    return [abspath(arch.path) for arch in scandir(ruta) if arch.is_file()]
+def busquedamatriz(Filename):
+  a=open(Filename)  # se abre el archivo con la matriz dentro (ES LA RUTA)
+
+  mimatriz=a.read()  # se asigna esa matriz a una variable (pero aun no esta en lista de listas)
+
+  b=mimatriz.split("\n") # se divide por el salto de linea
+  ma=[] # será la matriz
+  for x in b: # "b" ya esta en lista de listas, pero sus elementos no
+    c=list(x)
+    ma.append(c) # se añade a una nueva lista
+  return ma  # retorna el archivo en una matriz(listas dentro de otra lista)

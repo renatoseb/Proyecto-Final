@@ -3,25 +3,9 @@ from os import scandir, getcwd
 from os.path import abspath
 from tkinter.font import Font
 from tkinter import scrolledtext
+from Funciones import *
 
-def nombresarchv(ruta = getcwd()):
-    b= [arch.name for arch in scandir(ruta) if arch.is_file()]
-    for x in range(len(b)):
-        b[x]=b[x].rstrip(".txt")
-    return b
-def ruta(ruta = getcwd()):
-    return [abspath(arch.path) for arch in scandir(ruta) if arch.is_file()]
-def busquedamatriz(Filename):
-  a=open(Filename)  # se abre el archivo con la matriz dentro (ES LA RUTA)
 
-  mimatriz=a.read()  # se asigna esa matriz a una variable (pero aun no esta en lista de listas)
-
-  b=mimatriz.split("\n") # se divide por el salto de linea
-  ma=[] # será la matriz
-  for x in b: # "b" ya esta en lista de listas, pero sus elementos no
-    c=list(x)
-    ma.append(c) # se añade a una nueva lista
-  return ma  # retorna el archivo en una matriz(listas dentro de otra lista)
 rutafig="C:/ICC/PY3" #donde estaran las figuras
 listanombre=nombresarchv(rutafig)
 listaderutas=ruta(rutafig)
