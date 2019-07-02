@@ -78,3 +78,15 @@ def busquedamatriz(Filename):
     c=list(x)
     ma.append(c) # se añade a una nueva lista
   return ma  # retorna el archivo en una matriz(listas dentro de otra lista)
+
+
+#+------------------+  
+#|------------------| 
+#|| |------------| ||  
+#|| |------------| ||  
+#|| |------------| ||  
+#|| || <---------| ||  
+#|| |------------| ||  
+#|| |------------| ||  
+#|------------------|  
+#+------------------+
