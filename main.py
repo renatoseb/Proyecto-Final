@@ -138,8 +138,6 @@ def rankinss():
 
 ###################
 
-    print(demayoramenor)
-
     for x in valores:
         ventanaranking.insert(END,str(keys[q])+"\n")
         ventanaranking.insert(END,str(similitud(matriza,x))+"%"+"\n")
@@ -149,6 +147,7 @@ def rankinss():
             ventanaranking.insert(END, '\n')
         ventanaranking.insert(END,'\n')
         q+=1
+
 
 
 ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
