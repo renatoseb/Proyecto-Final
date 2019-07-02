@@ -30,8 +30,8 @@ def abrir():
 
 def crear_ventana():
     global MIDICCIONARIO
-    window = Toplevel(raiz) 
-    window.geometry("300x300+500+300") 
+    window = Toplevel(raiz)
+    window.geometry("300x300+500+300")
     window.resizable(0,0)
     window.config(bg="grey")
     window.title("Nueva matriz")
@@ -121,7 +121,6 @@ ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 #---------- Ranking -------------
 def rankinss():
-    ventanaranking.delete(1.0,END)
     global matriza
     global MIDICCIONARIO
     global valores,keys
@@ -140,11 +139,7 @@ def rankinss():
             ventanaranking.insert(END, '\n')
         ventanaranking.insert(END,'\n')
         q+=1
-#<<<<<<< HEAD
-    
-#=======
 
-#>>>>>>> 47d5ec198bcddff6c1965f3454ee6c9df4a91628
 
 ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
