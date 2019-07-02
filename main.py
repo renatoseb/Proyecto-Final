@@ -128,7 +128,16 @@ def rankinss():
     q=0
     for x in range(len(valores)):
         similitudes[keys[x]]=similitud(matriza,valores[x])
-    print(similitudes)
+
+############
+
+
+    listaparaquick=list(similitudes.values())
+
+
+###################
+
+    print(listaparaquick)
 
     for x in valores:
         ventanaranking.insert(END,str(keys[q])+"\n")
@@ -151,3 +160,5 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
+
