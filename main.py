@@ -136,17 +136,17 @@ def rankinss():
     listaordenada=quicksort(listaparaquick,0,len(listaparaquick)-1)
     demayoramenor=listaordenada[::-1]
 
-###################
-
-    for x in valores:
-        ventanaranking.insert(END,str(keys[q])+"\n")
-        ventanaranking.insert(END,str(similitud(matriza,x))+"%"+"\n")
-        for i in x:
-            for j in i:
-                ventanaranking.insert(END,str(j))
-            ventanaranking.insert(END, '\n')
-        ventanaranking.insert(END,'\n')
-        q+=1
+#################
+    for h in demayoramenor: 
+        for y in keys:
+            if similitudes[y] == h:
+                ventanaranking.insert(END,str(y)+"\n")
+                ventanaranking.insert(END,"Grado de similitud: "+str(h)+"%"+"\n")
+                for i in MIDICCIONARIO[y]:
+                    for j in i:
+                        ventanaranking.insert(END,str(j))
+                    ventanaranking.insert(END, '\n')
+                ventanaranking.insert(END,'\n')
 
 
 
