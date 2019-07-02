@@ -1,23 +1,23 @@
 from os import scandir, getcwd
 from os.path import abspath
 
-def partition(A,low,high):
+def particion(list,low,high):
     i = low 
-    pivot = A[low]
+    pivot = list[low]
     for j in range(low + 1,high + 1):
-        if A[j] <= pivot:
+        if list[j] <= pivot:
             i +=1
             if i != j:
-                A[i] , A[j] = A[j] , A[i]
-    A[i] , A[low] = A[low] , A[i]
+                list[i] , list[j] = list[j] , list[i]
+    list[i] , list[low] = list[low] , list[i]
     w = i
     return w
-def quicksort(A,low,high):
+def quicksort(list,low,high):
     if low < high:
-        w = partition(A,low,high)
-        quicksort(A,low,w-1)
-        quicksort(A,w+1,high)
-    return A
+        w = particion(list,low,high)
+        quicksort(list,low,w-1)
+        quicksort(list,w+1,high)
+    return list
 def filascolumnas(n): # n = una matriz, esta funcion para retornar el numero de filas y columnas
   fiyco=[] # lista vacía
   fila=0

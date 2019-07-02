@@ -121,6 +121,7 @@ ventanamatriz.grid(column=5, row=1,padx=10,columnspan=2)
 
 #---------- Ranking -------------
 def rankinss():
+    ventanaranking.delete(1.0,END)
     global matriza
     global MIDICCIONARIO
     global valores,keys
@@ -129,15 +130,15 @@ def rankinss():
     for x in range(len(valores)):
         similitudes[keys[x]]=similitud(matriza,valores[x])
 
-############
-
+##################
 
     listaparaquick=list(similitudes.values())
-
+    listaordenada=quicksort(listaparaquick,0,len(listaparaquick)-1)
+    demayoramenor=listaordenada[::-1]
 
 ###################
 
-    print(listaparaquick)
+    print(demayoramenor)
 
     for x in valores:
         ventanaranking.insert(END,str(keys[q])+"\n")
