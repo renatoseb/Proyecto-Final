@@ -14,7 +14,6 @@ nombres=nombresarchv(rutafig)
 rutas=ruta(rutafig)
 for x in range(len(listanombre)):
     MIDICCIONARIO[listanombre[x]]=busquedamatriz(listaderutas[x])
-
 def abrir():
     global listabox
     listanombre=nombresarchv(rutafig)
@@ -29,7 +28,8 @@ def abrir():
     listabox.config(yscrollcommand=scrolvert.set)
 
 def crear_ventana():
-    global MIDICCIONARIO
+    global listaderutas
+    global MIDICCIONARIO,valores,keys
     window = Toplevel(raiz)
     window.geometry("300x300+500+300")
     window.resizable(0,0)
@@ -42,21 +42,23 @@ def crear_ventana():
     Label(window,text="Ingrese nombre de la matriz").pack(ipady=5)
     nombrenew=Entry(window)
     nombrenew.pack(fill=X,pady=30)
+
     def agregar():
-        k=21
+        global listaderutas
+        global MIDICCIONARIO,valores,keys
         #-------cambien en donde esta guardado su archivo--------
         file = open(rutafig+"/"+str(nombrenew.get())+".txt", "w")
-        k+=1
+        b="C:\\ICC\\PY3\\"+str(nombrenew.get())+".txt"
+        listaderutas.append(b)
+        for x in range(len(listanombre)):
+            MIDICCIONARIO[listanombre[x]]=busquedamatriz(listaderutas[x])
+        valores=list(MIDICCIONARIO.values())
+        keys=list(MIDICCIONARIO.keys())
         #----aaaa---
         a=str(entradamatriz.get())
         file.write(a)
         window.destroy()
-    matrisss=str(entradamatriz.get()).split("\n")
-    newmatriz=[]
-    for x in matrisss:
-        c=list(x)
-        newmatriz.append(c)
-    MIDICCIONARIO[nombrenew.get()]=newmatriz
+
     we= Button(window, text="Agregar",command=agregar)
     we.pack(side=BOTTOM, padx=5, pady=5)
 #def leercoleccion():
@@ -90,13 +92,12 @@ listabox.config(yscrollcommand=scrolvert.set)
 
 agregar= Button(raiz, text="Agregar más...", command=crear_ventana)
 agregar.grid(column=3, row=0 , pady=10)
-
-valores=list(MIDICCIONARIO.values())
-keys=list(MIDICCIONARIO.keys())
+listanombre=nombresarchv(rutafig)
 matriza=[]
 #--------------Acá se mostrará la matriz a comparar impresa---------
 def recuperar():
-    global matriza
+    global matriza,listaderutas
+    valores=list(MIDICCIONARIO.values())
     ventanamatriz.delete(1.0,END)
     if len(listabox.curselection())!=0:
         w=listaderutas.index(listabox.get(listabox.curselection()[0]))
@@ -124,9 +125,9 @@ def rankinss():
     ventanaranking.delete(1.0,END)
     global matriza
     global MIDICCIONARIO
-    global valores,keys
+    valores=list(MIDICCIONARIO.values())
+    keys=list(MIDICCIONARIO.keys())
     similitudes={}
-    q=0
     for x in range(len(valores)):
         similitudes[keys[x]]=similitud(matriza,valores[x])
 
@@ -135,19 +136,21 @@ def rankinss():
     listaparaquick=list(similitudes.values())
     listaordenada=quicksort(listaparaquick,0,len(listaparaquick)-1)
     demayoramenor=listaordenada[::-1]
-
-#################
-    for h in demayoramenor: 
-        for y in keys:
-            if similitudes[y] == h:
-                ventanaranking.insert(END,str(y)+"\n")
-                ventanaranking.insert(END,"Grado de similitud: "+str(h)+"%"+"\n")
-                for i in MIDICCIONARIO[y]:
-                    for j in i:
-                        ventanaranking.insert(END,str(j))
-                    ventanaranking.insert(END, '\n')
-                ventanaranking.insert(END,'\n')
-
+    keysimilitudes=list(similitudes.keys())
+    valoressiimiliud=list(similitudes.values())
+    new={}
+    for x in demayoramenor:
+        a=valoressiimiliud.index(x)
+        new[keysimilitudes[a]]=x
+###################
+    for x in new:
+        ventanaranking.insert(END,str(x)+"\n")
+        ventanaranking.insert(END,str(new[x])+"%"+"\n")
+        for i in MIDICCIONARIO[x]:
+            for j in i:
+                ventanaranking.insert(END,str(j))
+            ventanaranking.insert(END, '\n')
+        ventanaranking.insert(END,'\n')
 
 
 ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
@@ -160,5 +163,6 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
+
 
 
