@@ -109,9 +109,10 @@ agregar.grid(column=3, row=0 , pady=10)
 
 valores=list(MIDICCIONARIO.values())
 keys=list(MIDICCIONARIO.keys())
-
+matriza=[]
 #--------------Acá se mostrará la matriz a comparar impresa---------
-def recuperar():    
+def recuperar():
+    global matriza
     ventanamatriz.delete(1.0,END)
     if len(listabox.curselection())!=0:
         w=listaderutas.index(listabox.get(listabox.curselection()[0]))
@@ -120,7 +121,7 @@ def recuperar():
             for y in x:
                 ventanamatriz.insert(END, str(y))
             ventanamatriz.insert(END, '\n')
-    
+
 
 
 leerfigura= Button(raiz, text="Leer figura de consulta",command=recuperar)
@@ -140,16 +141,26 @@ def rankinss():
     global matriza
     global MIDICCIONARIO
     global valores,keys
+    similitudes={}
     q=0
+    for x in range(len(valores)):
+        similitudes[keys[x]]=similitud(matriza,valores[x])
+    print(similitudes)
+
     for x in valores:
         ventanaranking.insert(END,str(keys[q])+"\n")
+        ventanaranking.insert(END,str(similitud(matriza,x))+"%"+"\n")
         for i in x:
             for j in i:
                 ventanaranking.insert(END,str(j))
             ventanaranking.insert(END, '\n')
         ventanaranking.insert(END,'\n')
         q+=1
+#<<<<<<< HEAD
     
+#=======
+
+#>>>>>>> 47d5ec198bcddff6c1965f3454ee6c9df4a91628
 
 ranking= Button(raiz, text="Ranking de Similitud",command=rankinss)
 ranking.grid(column=7, row= 0, sticky="w", padx=10)
@@ -161,6 +172,3 @@ ventanaranking.config(yscrollcommand=scrolito.set)
 
 
 raiz.mainloop()
-
-
-

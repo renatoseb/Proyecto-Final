@@ -15,3 +15,42 @@ def quicksort(A,low,high):
         quicksort(A,low,w-1)
         quicksort(A,w+1,high)
     return A
+#<<<<<<< HEAD
+#=======
+def filascolumnas(n): # n = una matriz, esta funcion para retornar el numero de filas y columnas
+  fiyco=[] # lista vacía
+  fila=0
+  columna=0
+  for i in n:
+    fila+=1 # se cuenta los elementos, que son las filas
+    columna=len(i) # como las listas dentre de la lista grande tienen igual numero de elementos, la columna no varía
+  fiyco.append(fila)
+  fiyco.append(columna)
+  return fiyco  # retorna las filas y columnas de una matriz (en una lista)
+
+def totalceldas(n): # n es una matriz
+  total=0 # contador
+  for j in n: # va por fila
+    for i in j: # va por dentre de la fila, las columnas
+      total+=1
+  return total  # retorna el total de elementos de la matriz
+
+def similitud(n,b): # n,b son matrices
+  fica_n=filascolumnas(n) # fica son filas y columnas de n y b
+  fica_b=filascolumnas(b)
+  if fica_b!=fica_n:
+    return 0 # cuando no son iguales en filas o columnas
+
+  else:
+    a=0
+    c=0
+    cont=0
+    total_celdas_n=totalceldas(n) # total de elementos en n, no se condiciona porque n y b tienen los mismos elementos
+    for i in range(total_celdas_n):
+      if n[a][c]==b[a][c]:
+        cont+=1
+      c+=1
+      if c==len(n[0]): # se iguala al primer elemento
+        c=0
+        a+=1
+#>>>>>>> 47d5ec198bcddff6c1965f3454ee6c9df4a91628
