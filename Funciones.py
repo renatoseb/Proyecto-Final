@@ -54,6 +54,11 @@ def similitud(n,b): # n,b son matrices
       if c==len(n[0]): # se iguala al primer elemento
         c=0
         a+=1
+    similitudn_b=cont/total_celdas_n  # el cont brindara el numero total de elementos iguales y se divide entre el total para averiguar cuanto se parece
+
+    porcentaje=round(similitudn_b*100,2) # se multiplica por 100 para el porcentaje y se redondea
+
+    return porcentaje
 
 def nombresarchv(ruta = getcwd()):
     b= [arch.name for arch in scandir(ruta) if arch.is_file()]
